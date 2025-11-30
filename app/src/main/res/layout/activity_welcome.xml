@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_cream"
+    tools:context=".WelcomeActivity">
+
+    <TextView
+        android:layout_marginTop="1in"
+        android:id="@+id/tv_main_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lokally"
+        android:textColor="@color/text_dark_brown"
+        android:textSize="38sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintBottom_toTopOf="@id/tv_subheading"
+        android:layout_marginStart="32dp"/>
+
+    <TextView
+        android:id="@+id/tv_subheading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/support_local_love_local"
+        android:textColor="@color/sdg_green"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/tv_main_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_main_title"
+        android:layout_marginTop="8dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_signup_choice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:paddingVertical="12dp"
+        app:cornerRadius="24dp"
+        app:backgroundTint="@color/accent_orange"
+        app:layout_constraintBottom_toTopOf="@+id/btn_signin_choice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="32dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_signin_choice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in"
+        android:textSize="18sp"
+        android:paddingVertical="12dp"
+        app:cornerRadius="24dp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:textColor="@color/accent_orange"
+        android:backgroundTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="64dp"
+        android:layout_marginHorizontal="32dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

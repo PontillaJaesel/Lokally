@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tv_welcome_message" type="id" />
+    <item name="tv_purpose_title" type="id" />
+    <item name="tv_purpose_details" type="id" />
+    <item name="btn_nav_items" type="id" />
+    <item name="btn_nav_services" type="id" />
+    <item name="btn_logout" type="id" />
+</resources>

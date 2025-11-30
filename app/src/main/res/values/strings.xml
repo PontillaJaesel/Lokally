@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Lokally</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_register">Register</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="username">Username</string>
+    <string name="login_now">Click to Login</string>
+    <string name="not_registered_yet_click_here_to_register">Not registered yet? Click here to register.</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="support_local_love_local">Support Local, Love Local.</string>
+    <string name="lokally">Lokally</string>
+</resources>
