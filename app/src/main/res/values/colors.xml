@@ -12,4 +12,6 @@
     <color name="accent_orange">#C96445</color>
     <color name="background_cream">#F1E4D4</color>
     <color name="text_dark_brown">#3F2F2F</color>
+
+    <color name="splash_background_color">#F1E4D4</color>
 </resources>
