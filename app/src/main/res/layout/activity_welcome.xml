@@ -1,70 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_cream"
     tools:context=".WelcomeActivity">
 
+    <ImageView
+        android:id="@+id/app_logo_small"
+        android:layout_width="185dp"
+        android:layout_height="182dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/app_logo_description"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toTopOf="@+id/tv_main_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
-        android:layout_marginTop="1in"
         android:id="@+id/tv_main_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lokally"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/spicy_rice"
+        android:text="@string/welcome"
         android:textColor="@color/text_dark_brown"
-        android:textSize="38sp"
+        android:textSize="36sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2"
-        app:layout_constraintBottom_toTopOf="@id/tv_subheading"
-        android:layout_marginStart="32dp"/>
+        app:layout_constraintVertical_bias="0.48" />
 
     <TextView
         android:id="@+id/tv_subheading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/support_local_love_local"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.1"
+        android:text="@string/welcome_long_description"
         android:textColor="@color/sdg_green"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@id/tv_main_title"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_signup_choice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_main_title"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintVertical_bias="0.063" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_signup_choice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/sign_up"
-        android:textSize="18sp"
-        android:textColor="@android:color/white"
-        android:paddingVertical="12dp"
-        app:cornerRadius="24dp"
-        app:backgroundTint="@color/accent_orange"
-        app:layout_constraintBottom_toTopOf="@+id/btn_signin_choice"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="1dp"
-        android:layout_marginHorizontal="32dp"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_signin_choice"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="64dp"
+        android:layout_marginBottom="150dp"
+        android:fontFamily="sans-serif-medium"
+        android:foregroundTint="#FFFCFC"
+        android:paddingVertical="14dp"
         android:text="@string/sign_in"
+        android:textColor="@color/white"
         android:textSize="18sp"
-        android:paddingVertical="12dp"
-        app:cornerRadius="24dp"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:textColor="@color/accent_orange"
-        android:backgroundTint="@android:color/white"
+        app:backgroundTint="@color/accent_orange"
+        app:cornerRadius="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="90dp"
-        android:layout_marginHorizontal="32dp"/>
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_signup_choice">
+
+        <!-- Static prompt part (dark brown) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/dont_have_an_account"
+            android:textColor="@color/text_dark_brown"
+            android:textSize="12dp" />
+
+        <!-- The clickable "Login" part (orange and bold) -->
+        <TextView
+            android:id="@+id/loginNow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:paddingStart="4dp"
+            android:text="@string/register_action"
+            android:textColor="@color/accent_orange"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
+    </LinearLayout>
+
+    <!-- Removed: The original background overlay and the redundant tv_subheading visibility properties. -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

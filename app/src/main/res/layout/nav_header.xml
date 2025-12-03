@@ -9,19 +9,21 @@
     android:background="@color/background_cream"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
+    <!-- Greeting with colored username -->
     <TextView
+        android:id="@+id/textViewGreeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Android Knowledge"
         android:textColor="@color/text_dark_brown"
-        android:textStyle="bold"/>
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
+    <!-- Email -->
     <TextView
+        android:id="@+id/textViewEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="contact@androidknowledge.com"
         android:textColor="@color/text_dark_brown"
         android:textSize="14sp"
         android:layout_marginBottom="16dp"/>
-
 </LinearLayout>

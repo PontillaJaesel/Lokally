@@ -6,4 +6,8 @@
     <item name="btn_nav_items" type="id" />
     <item name="btn_nav_services" type="id" />
     <item name="btn_logout" type="id" />
+    <item name="btn_signup_choice" type="id" />
+    <item name="btn_signin_choice" type="id" />
+    <item name="tv_subheading" type="id" />
+    <item name="tv_main_title" type="id" />
 </resources>

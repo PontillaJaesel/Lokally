@@ -7,9 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.lokally"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.lokally"
@@ -39,6 +37,13 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.14"
+    }
+    kotlinOptions {
+        jvmTarget = "11"
     }
 }
 
@@ -50,15 +55,37 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material3)
-    implementation(platform("com.google.firebase:firebase-bom:34.6.0"))
-    implementation("com.google.firebase:firebase-auth")
-    implementation(libs.firebase.auth)
+
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
+    implementation(platform(libs.firebase.bom))
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+
+    // Other AndroidX and Material libraries
+    implementation(platform("androidx.compose:compose-bom:2024.02.00"))
+    // Core Compose UI
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+
+    // Material 3
+    implementation("androidx.compose.material3:material3")
+
+    // Activity Compose
+    implementation("androidx.activity:activity-compose:1.8.2")
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation(libs.core.splashscreen)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.auth)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

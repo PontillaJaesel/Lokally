@@ -20,6 +20,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import android.widget.TextView
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,6 +46,46 @@ class MainActivity : AppCompatActivity() {
         drawerLayout = findViewById(R.id.drawer_layout)
         fab = findViewById(R.id.fab)
         val navigationView: NavigationView = findViewById(R.id.nav_view)
+        val headerView = navigationView.getHeaderView(0) // get the header
+        val navGreeting = headerView.findViewById<TextView>(R.id.textViewGreeting)
+        val navEmail = headerView.findViewById<TextView>(R.id.textViewEmail)
+
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
+
+        if (currentUser != null) {
+            val userId = currentUser.uid
+            db.collection("users").document(userId)
+                .get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.exists()) {
+                        val name = document.getString("fullName") ?: "User"
+                        val email = document.getString("email") ?: "No Email"
+
+                        // Create greeting with colored username
+                        val greeting = "Hello, $name!"
+                        val spannable = android.text.SpannableString(greeting)
+                        val start = greeting.indexOf(name)
+                        val end = start + name.length
+                        spannable.setSpan(
+                            android.text.style.ForegroundColorSpan(
+                                resources.getColor(R.color.sdg_green, null) // username color
+                            ),
+                            start,
+                            end,
+                            android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                        )
+
+                        navGreeting.text = spannable
+                        navEmail.text = email
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(this, "Failed to load profile: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+        }
+
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
 
         setSupportActionBar(toolbar)

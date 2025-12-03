@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -21,6 +22,7 @@ class Login : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var progressBar: ProgressBar
     private lateinit var registerNow: TextView
+    private lateinit var backButton: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,10 +34,17 @@ class Login : AppCompatActivity() {
         buttonLogin = findViewById(R.id.btn_login)
         auth = FirebaseAuth.getInstance()
         progressBar = findViewById(R.id.progressBar)
-        registerNow = findViewById(R.id.register_now)
+        registerNow = findViewById(R.id.registerNow)
+        backButton = findViewById(R.id.back_button)
 
         registerNow.setOnClickListener {
             val intent = Intent(this, Register::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        backButton.setOnClickListener {
+            val intent = Intent(this, WelcomeActivity::class.java)
             startActivity(intent)
             finish()
         }
