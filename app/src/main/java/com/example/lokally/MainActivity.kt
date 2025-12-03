@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.example.lokally.fragments.MarketplaceHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
@@ -46,7 +47,9 @@ class MainActivity : AppCompatActivity() {
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
 
+        // Sets the Toolbar to act as the ActionBar for this Activity window.
         setSupportActionBar(toolbar)
+
         val toggle = ActionBarDrawerToggle(
             this,
             drawerLayout,
@@ -67,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> replaceFragment(HomeFragment())
-                R.id.marketplace -> replaceFragment(MarketplaceFragment())
+                R.id.marketplace -> replaceFragment(MarketplaceHostFragment())
                 R.id.messages -> replaceFragment(MessagesFragment())
                 R.id.profile -> replaceFragment(ProfileFragment())
             }
@@ -78,6 +81,32 @@ class MainActivity : AppCompatActivity() {
             showBottomDialog()
         }
     }
+
+    // =========================================================================
+    // MENU IMPLEMENTATION START
+    // =========================================================================
+
+    // 1. INFLATE: Load the icons from 'menu_toolbar.xml' into the top bar
+    override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar, menu)
+        return true
+    }
+
+    // 2. CLICK: Handle what happens when the user taps the Cart
+    override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_cart -> {
+                // Feedback for the user
+                Toast.makeText(this, "Opening Cart...", Toast.LENGTH_SHORT).show()
+                // TODO: startActivity(Intent(this, CartActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+    // =========================================================================
+    // MENU IMPLEMENTATION END
+    // =========================================================================
 
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
