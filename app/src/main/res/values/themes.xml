@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- CHANGED: Parent theme now enforces Light mode -->
     <style name="Theme.Lokally" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
 
@@ -13,10 +12,6 @@
         <item name="colorOnSecondary">@color/black</item>
 
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-
-        <item name="android:fontFamily">@font/montserrat</item>
-        <!-- For compatibility on newer devices (API 28+) -->
-        <item name="fontFamily">@font/montserrat</item>
     </style>
 
     <style name="DialogAnimation">
@@ -26,9 +21,34 @@
 
     <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/splash_background_color</item>
-
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_icon</item>
-
         <item name="postSplashScreenTheme">@style/Theme.Lokally</item>
+    </style>
+
+    <style name="LokallyTitleText">
+        <item name="android:fontFamily">@font/playfair_display_bold</item>
+        <item name="fontFamily">@font/playfair_display_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="GoalTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/mulish</item>
+        <item name="android:textColor">@color/text_dark_brown</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+    </style>
+
+    <style name="FeatureTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/mulish_bold</item>
+        <item name="android:textColor">@color/text_dark_brown</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingVertical">8dp</item>
+        <item name="android:drawablePadding">12dp</item>
     </style>
 </resources>

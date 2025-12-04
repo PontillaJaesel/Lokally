@@ -195,32 +195,25 @@ class MainActivity : AppCompatActivity() {
     private fun showBottomDialog() {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        // Make sure this matches the filename of the XML I gave you
         dialog.setContentView(R.layout.bottomsheetlayout)
 
-        val videoLayout = dialog.findViewById<LinearLayout>(R.id.layoutVideo)
-        val shortsLayout = dialog.findViewById<LinearLayout>(R.id.layoutShorts)
-        val liveLayout = dialog.findViewById<LinearLayout>(R.id.layoutLive)
-        val cancelButton = dialog.findViewById<ImageView>(R.id.cancelButton)
-
-        videoLayout.setOnClickListener {
+        // 1. Setup Item Listing Click
+        val layoutItemListing = dialog.findViewById<LinearLayout>(R.id.layoutItemListing)
+        layoutItemListing.setOnClickListener {
             dialog.dismiss()
-            Toast.makeText(this@MainActivity, "Upload a Video is clicked", Toast.LENGTH_SHORT)
-                .show()
+            // Navigate to your "Add Item" screen
+            // Example: startActivity(Intent(this, AddItemActivity::class.java))
+            Toast.makeText(this, "Create Item Listing Clicked", Toast.LENGTH_SHORT).show()
         }
 
-        shortsLayout.setOnClickListener {
+        // 2. Setup Service Listing Click
+        val layoutServiceListing = dialog.findViewById<LinearLayout>(R.id.layoutServiceListing)
+        layoutServiceListing.setOnClickListener {
             dialog.dismiss()
-            Toast.makeText(this@MainActivity, "Create a short is Clicked", Toast.LENGTH_SHORT)
-                .show()
-        }
-
-        liveLayout.setOnClickListener {
-            dialog.dismiss()
-            Toast.makeText(this@MainActivity, "Go live is Clicked", Toast.LENGTH_SHORT).show()
-        }
-
-        cancelButton.setOnClickListener {
-            dialog.dismiss()
+            // Navigate to your "Add Service" screen
+            // Example: startActivity(Intent(this, AddServiceActivity::class.java))
+            Toast.makeText(this, "Create Service Listing Clicked", Toast.LENGTH_SHORT).show()
         }
 
         dialog.show()

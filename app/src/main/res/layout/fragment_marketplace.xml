@@ -20,6 +20,7 @@
             android:padding="12dp"
             android:text="ITEMS"
             android:textSize="14sp"
+            android:fontFamily="@font/roboto"
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="@color/lokally_green" />
@@ -32,6 +33,7 @@
             android:padding="12dp"
             android:text="SERVICES"
             android:textSize="14sp"
+            android:fontFamily="@font/roboto"
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="@color/gray" />
