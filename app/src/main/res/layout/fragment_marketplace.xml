@@ -1,17 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MarketplaceFragment">
+    android:background="@color/background_cream"
+    android:padding="8dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- Tab Switch (Items / Services) -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Marketplace"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:textColor="@color/accent_orange" />
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tab_items"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="12dp"
+            android:text="ITEMS"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/lokally_green" />
+
+        <TextView
+            android:id="@+id/tab_services"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="12dp"
+            android:text="SERVICES"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/gray" />
+    </LinearLayout>
+
+    <!-- Search Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp">
+
+        <EditText
+            android:id="@+id/searchInput"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:hint="Search"
+            android:background="@drawable/search_rounded"
+            android:paddingHorizontal="12dp" />
+
+        <ImageView
+            android:id="@+id/searchButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_search"
+            android:tint="@color/lokally_green"
+            android:layout_marginLeft="6dp"/>
+    </LinearLayout>
+
+    <!-- Dropdown Filters -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="6dp"
+        android:paddingBottom="4dp">
+
+        <Spinner
+            android:id="@+id/categoriesSpinner"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/dropdown_rounded" />
+
+        <Spinner
+            android:id="@+id/ratePriceSpinner"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="6dp"
+            android:background="@drawable/dropdown_rounded" />
+    </LinearLayout>
+
+    <!-- Fragment container for lists -->
+    <FrameLayout
+        android:id="@+id/listContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+</LinearLayout>

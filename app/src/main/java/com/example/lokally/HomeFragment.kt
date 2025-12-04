@@ -1,6 +1,7 @@
 package com.example.lokally
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,14 +14,22 @@ import com.example.lokally.data.HeaderCard
 import com.example.lokally.data.GridItem
 import com.example.lokally.adapters.HeaderCardAdapter
 import com.example.lokally.adapters.GridItemAdapter
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class HomeFragment : Fragment() {
-    
+
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    
+
+    private lateinit var headerAdapter: HeaderCardAdapter
+    private val headerCards = mutableListOf<HeaderCard>()
+
+    private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
     private val purposeTitle = "SDG 12: Responsible Consumption"
-    private val purposeContent = "Lokally is a community-driven marketplace that makes it easy to buy, sell, and exchange goods or services within your local area.\nWe promote sustainability, reuse, and support for local communities by empowering people to trade responsibly."
+    private val purposeContent = "Lokally is a community-driven marketplace that makes it easy to buy, sell, and exchange goods or services within your local area. We promote sustainability, reuse, and support for local communities by empowering people to trade responsibly."
     private val goalsContent = """
         - Encourage responsible consumption by reducing waste and giving items a second life.
         - Support local communities with easy access to nearby goods and services.
@@ -40,33 +49,52 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupHeaderCards()
+        fetchUserNameAndSetupHeader() // Fetch displayName first before setting up header
         setupGridItems()
         setupTabLayout()
     }
-    
-    private fun setupHeaderCards() {
-        val headerCards = listOf(
-            HeaderCard(
-                title = "Hi, [User's Name]!",
-                subtitle = "Your community marketplace starts here.",
-                backgroundColor = R.color.accent_orange
-            ),
-            HeaderCard(
-                title = purposeTitle,
-                subtitle = "Lokally is a community-driven marketplace that makes it easy to buy, sell, and exchange goods or services within your local area.",
-                backgroundColor = R.color.sdg_green
-            )
-        )
 
-        val adapter = HeaderCardAdapter(headerCards)
+    private fun fetchUserNameAndSetupHeader() {
+        val userId = auth.currentUser?.uid ?: return // Exit if user not logged in
+
+        firestore.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                val fullName = document?.getString("fullName") ?: "there" // Fallback
+                setupHeaderCards(fullName)
+            }
+            .addOnFailureListener { exception ->
+                Log.e("FetchUserName", "Error fetching user name", exception)
+                setupHeaderCards("there") // Fallback if error
+            }
+    }
+
+    private fun setupHeaderCards(fullName: String) {
+        headerCards.apply {
+            clear()
+            add(
+                HeaderCard(
+                    title = "Hi, $fullName!",
+                    subtitle = "Your community marketplace starts here.",
+                    backgroundColor = R.color.accent_orange
+                )
+            )
+            add(
+                HeaderCard(
+                    title = purposeTitle,
+                    subtitle = "Lokally is a community-driven marketplace that makes it easy to buy, sell, and exchange goods or services within your local area.",
+                    backgroundColor = R.color.sdg_green
+                )
+            )
+        }
+
+        headerAdapter = HeaderCardAdapter(headerCards)
 
         binding.rvSwipeableHeader.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            this.adapter = adapter
+            adapter = headerAdapter
         }
     }
-    
+
     private fun setupGridItems() {
         val gridItems = listOf(
             GridItem("🛒", "Buy & Sell Items"),
@@ -76,7 +104,7 @@ class HomeFragment : Fragment() {
             GridItem("🔎", "Explore Your Community’s Resources"),
             GridItem("---", "More")
         )
-        
+
         val adapter = GridItemAdapter(gridItems)
 
         binding.rvMarketplaceGrid.apply {
@@ -86,15 +114,15 @@ class HomeFragment : Fragment() {
             isNestedScrollingEnabled = false
         }
     }
-    
+
     private fun setupTabLayout() {
         val tabLayout = binding.tabLayout
-        
+
         tabLayout.addTab(tabLayout.newTab().setText("Purpose"))
         tabLayout.addTab(tabLayout.newTab().setText("Goal"))
-        
+
         updateTabContent(0)
-        
+
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 updateTabContent(tab.position)
@@ -103,14 +131,14 @@ class HomeFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
     }
-    
+
     private fun updateTabContent(position: Int) {
         when (position) {
-            0 -> { 
+            0 -> {
                 binding.tvTabTitle.text = purposeTitle
                 binding.tvTabContent.text = purposeContent
             }
-            1 -> { 
+            1 -> {
                 binding.tvTabTitle.text = "Our Goals"
                 binding.tvTabContent.text = goalsContent
             }

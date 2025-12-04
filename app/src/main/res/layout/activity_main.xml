@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,38 +9,30 @@
     tools:openDrawer="start"
     tools:context=".MainActivity">
 
+    <!-- MAIN CONTENT -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="?attr/android:colorBackground">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:id="@+id/toolbar"
             android:elevation="4dp"
-            android:background="@color/accent_orange"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+            android:background="?attr/colorPrimary"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
         <FrameLayout
+            android:id="@+id/fragment_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/fragment_layout"/>
-
+            android:layout_height="match_parent" />
     </LinearLayout>
 
-    <com.google.android.material.navigation.NavigationView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/nav_view"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/nav_menu"
-        app:itemIconTint="@color/accent_orange"
-        app:itemTextColor="@color/accent_orange"/>
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <!-- MOVE THIS ABOVE NAVIGATIONVIEW -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -50,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/white"
+            android:background="?attr/colorSurface"
             app:fabCradleMargin="10dp"
             app:fabCradleRoundedCornerRadius="50dp">
 
@@ -65,14 +56,26 @@
         </com.google.android.material.bottomappbar.BottomAppBar>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="?attr/colorSurface"
             android:src="@drawable/baseline_add_24"
             app:layout_anchor="@id/bottomAppBar"
             app:maxImageSize="40dp"
-            android:id="@+id/fab"
-            app:tint="@color/accent_orange" />
+            app:tint="?attr/colorPrimary" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    <!-- MUST BE LAST -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu"
+        app:itemIconTint="?attr/colorPrimary"
+        app:itemTextColor="?attr/colorPrimary" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

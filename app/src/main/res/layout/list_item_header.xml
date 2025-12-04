@@ -24,7 +24,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Hi, [User's Name]!" />
+            android:text="Hi!" />
 
         <TextView
             android:id="@+id/tv_header_subtitle"

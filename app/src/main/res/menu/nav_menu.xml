@@ -36,7 +36,6 @@
                 android:icon="@drawable/outline_exit_to_app_24"
                 android:title="Logout"/>
         </menu>
-
     </item>
 
 </menu>

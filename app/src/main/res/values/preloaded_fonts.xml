@@ -2,6 +2,12 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/caprasimo</item>
+        <item>@font/montserrat</item>
+        <item>@font/montserrat_extrabold</item>
+        <item>@font/mulish</item>
+        <item>@font/mulish_bold</item>
+        <item>@font/mulish_extrabold</item>
+        <item>@font/raleway</item>
         <item>@font/spicy_rice</item>
     </array>
 </resources>

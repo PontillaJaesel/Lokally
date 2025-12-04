@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- This MUST match the file name: montserrat_regular.ttf -->
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/montserrat" />
+
+    <!-- This MUST match the file name: montserrat_bold.ttf -->
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="700"
+        android:font="@font/montserrat_bold" />
+
+</font-family>

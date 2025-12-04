@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.example.lokally.fragments.MarketplaceHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
@@ -37,9 +38,10 @@ class MainActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         if (firebaseAuth.currentUser == null) {
-            startActivity(Intent(this, Register::class.java))
+            val intent = Intent(this, WelcomeActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
             finish()
-            return
         }
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
@@ -52,6 +54,35 @@ class MainActivity : AppCompatActivity() {
 
         val currentUser = FirebaseAuth.getInstance().currentUser
         val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
+
+        navigationView.setNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    // Assuming HomeFragment exists
+                    // replaceFragment(HomeFragment())
+                    drawerLayout.closeDrawers()
+                    true
+                }
+                // R.id.nav_theme case removed
+                R.id.nav_logout -> {
+                    drawerLayout.closeDrawers()
+
+                    firebaseAuth.signOut()
+
+                    val intent = Intent(this, WelcomeActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+
+                else -> {
+                    drawerLayout.closeDrawers()
+                    true
+                }
+            }
+        }
 
         if (currentUser != null) {
             val userId = currentUser.uid
@@ -88,7 +119,9 @@ class MainActivity : AppCompatActivity() {
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
 
+        // Sets the Toolbar to act as the ActionBar for this Activity window.
         setSupportActionBar(toolbar)
+
         val toggle = ActionBarDrawerToggle(
             this,
             drawerLayout,
@@ -99,6 +132,8 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
+        // Theme DrawerListener removed
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_layout, HomeFragment()).commit()
@@ -108,10 +143,11 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.background = null
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.home -> replaceFragment(HomeFragment())
-                R.id.marketplace -> replaceFragment(MarketplaceFragment())
-                R.id.messages -> replaceFragment(MessagesFragment())
-                R.id.profile -> replaceFragment(ProfileFragment())
+                 R.id.home -> replaceFragment(HomeFragment())
+                 R.id.marketplace -> replaceFragment(MarketplaceHostFragment())
+                 R.id.messages -> replaceFragment(MessagesFragment())
+                 R.id.profile -> replaceFragment(ProfileFragment())
+                else -> true
             }
             true
         }
@@ -120,6 +156,34 @@ class MainActivity : AppCompatActivity() {
             showBottomDialog()
         }
     }
+
+    // Theme toggling functions removed
+
+    // =========================================================================
+    // MENU IMPLEMENTATION START
+    // =========================================================================
+
+    // 1. INFLATE: Load the icons from 'menu_toolbar.xml' into the top bar
+    override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar, menu)
+        return true
+    }
+
+    // 2. CLICK: Handle what happens when the user taps the Cart
+    override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_cart -> {
+                // Feedback for the user
+                Toast.makeText(this, "Opening Cart...", Toast.LENGTH_SHORT).show()
+                // TODO: startActivity(Intent(this, CartActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+    // =========================================================================
+    // MENU IMPLEMENTATION END
+    // =========================================================================
 
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
